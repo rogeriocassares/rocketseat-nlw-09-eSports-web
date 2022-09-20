@@ -9,6 +9,7 @@ import "./styles/main.css";
 import logoImage from "./assets/logo-nlw-esports.svg";
 import { Input } from "./components/Form/Input";
 import { CreateAdModal } from "./components/CreateAdModal";
+import axios from "axios";
 
 interface Game {
   id: string;
@@ -23,11 +24,9 @@ function App() {
   const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
-    fetch("http://10.33.133.143:3333/games")
-      .then((response) => response.json())
-      .then((data) => {
-        setGames(data);
-      });
+    axios("http://10.33.133.143:3333/games").then((response) => {
+      setGames(response.data);
+    });
   }, []);
 
   return (
